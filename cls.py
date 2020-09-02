@@ -1,0 +1,1 @@
+def cls(): print( "\n" * 10)
