@@ -104,7 +104,7 @@ def counter():
             lenliveupdate = len(liveupdate) - 3
             for _ in range(lenliveupdate):
                 liveupdate.pop(0)
-        time.sleep(0.0001)
+        time.sleep(0.1)
 
         if (count/40).is_integer() or count == 1:
             cls()
