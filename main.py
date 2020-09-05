@@ -34,8 +34,10 @@ def start():
         for _ in range(int(totalcustomers)):
             p, customer = reservation()
             print(customer)
+            if  p == 1:
+                print('room unavb')
 
-            if customer['customernamewospace'] != "":
+            elif customer['customernamewospace'] != "":
                 customername = customer['customernamewospace']
                 custdata[customername] = customer
 
@@ -68,7 +70,7 @@ def counter():
                 f.close()
             p, customer = reservation()
             if p == 1:
-                liveupdate.append('there was no room available for '+customer)
+                liveupdate.insert(0,'there was no room available for '+customer)
             else:
                 customername1 = customer['customernamewospace']
                 custdata[customername1] = customer
@@ -76,7 +78,7 @@ def counter():
                 customerroom = customer['stayingin']
                 enterupdate = '{0} entered the hotel at {1} and checked in into room {2}'.format(customername, count,
                                                                                                  customerroom)
-                liveupdate.append(enterupdate)
+                liveupdate.insert(0,enterupdate)
                 with open(hotelfolder + '\\' + 'custdata.json', 'w') as f:
                     json.dump(custdata, f, indent=4)
                     f.close()
@@ -90,20 +92,20 @@ def counter():
                 if 'clean1' in schedule[str(count)]:
                     cleaners()
                     cleanupdate = 'the rooms were cleaned at {0}'.format(count)
-                    liveupdate.append(cleanupdate)
+                    liveupdate.insert(0,cleanupdate)
 
                 elif schedule[str(count)].endswith(' checkout'):
                     personname = schedule[str(count)]
                     personname = personname[:-9]
                     checkout(personname)
                     checkoutupdate = '{0} checked out at {1}'.format(personname, count)
-                    liveupdate.append(checkoutupdate)
+                    liveupdate.insert(0,checkoutupdate)
 
         f.close()
         if len(liveupdate) >= 4:
             lenliveupdate = len(liveupdate) - 3
             for _ in range(lenliveupdate):
-                liveupdate.pop(0)
+                liveupdate.pop(3)
         time.sleep(0.1)
 
         if (count/40).is_integer() or count == 1:
@@ -116,7 +118,9 @@ def counter():
                 total rooms: {0}   total rooms available: {1}
                 normal rooms: {2}  normal rooms available: {3}
                 suites: {4}        suites available: {5}
-                luxury suites {6}  luxury suites available: {7}'''.format(totalrooms, totalroomsavb, totalnormal,
+                luxury suites {6}  luxury suites available: {7}
+                
+                '''.format(totalrooms, totalroomsavb, totalnormal,
                                                                           normalavb, totalsuite, suiteavb, totallux,
                                                                           luxavb))
 
