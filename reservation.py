@@ -77,7 +77,7 @@ def reservation():
 
         schedule.update({checkouttime: customernamewospace + ' checkout'})
         with open(findfolder() + '\\' + 'schedule.json', 'w') as f:
-            json.dump(schedule, f)
+            json.dump(schedule, f, indent=4)
             f.close()
         jsoncustomer['stayingin'] = avbwantedroom
 
