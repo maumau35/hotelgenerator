@@ -24,7 +24,7 @@ def start():
         for x in range(100):
             cleantime = 240+x*480
             schedule.update({cleantime:'clean1'})
-        json.dump(schedule,f)
+        json.dump(schedule,f, indent=4)
         f.close()
     totalrooms = (hoteldata['totalrooms'])
     totalcustomers = totalrooms * random.uniform(0.6,0.8)
@@ -131,7 +131,6 @@ def counter():
 
 
         count += 1
-
 
         with open(findfolder()+'\\'+'hoteldata.json', 'r') as f:
             hoteldata = json.loads(f.read())
