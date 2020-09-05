@@ -6,7 +6,6 @@ from folderfinder import findfolder
 import os
 def reservation():
 
-
     hotelfolder = findfolder()
     with open(findfolder() + '\\' + 'schedule.json', 'r') as f:
         schedule = json.loads(f.read())
