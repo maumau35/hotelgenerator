@@ -54,5 +54,5 @@ def availableroom(roomtype):
                 else:
                     roomnumber += 1
     else:
-        print('there are currently no rooms of this type available')
+
         return 'room unavb'

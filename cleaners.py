@@ -2,7 +2,6 @@ import json
 import time
 from folderfinder import findfolder
 
-
 def cleaners():
 
 
@@ -20,8 +19,6 @@ def cleaners():
     with open(hotelfolder + "\\" + 'roomfile.json', "r") as f:
         roomsdata = json.loads(f.read())
         f.close()
-
-
 
 
     while currentfloor <= int(hoteldata['floors']):

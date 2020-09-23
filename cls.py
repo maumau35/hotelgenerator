@@ -1,1 +1,1 @@
-def cls(): print( "\n" * 10)
+def cls(): print( "\n" * 30)

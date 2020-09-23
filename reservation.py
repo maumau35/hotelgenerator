@@ -2,9 +2,11 @@ import availability
 import generatecustomer
 import random
 import json
+from money import money
 from folderfinder import findfolder
 import os
 def reservation():
+
 
     hotelfolder = findfolder()
     with open(findfolder() + '\\' + 'schedule.json', 'r') as f:
@@ -20,7 +22,9 @@ def reservation():
         'stayingin': '',
         'inroom': '',
         'checksout': '',
-        'goesout': ''
+        'goesout': '',
+        'status': 'inroom',
+        'lastate': ''
     }
 
     custwantroom = desiredroom
@@ -67,14 +71,25 @@ def reservation():
         with open(findfolder() + '\\' + 'time.txt', 'r') as f:
             time = float(f.read())
             f.close()
-        checkouttime = int(random.uniform(10, 4800) + time)
+        timeinhotel = random.uniform(100, 48000)
+        checkouttime = int(timeinhotel + time)
         for _ in range(10000):
             if checkouttime not in schedule:
                 break
             else:
-                checkouttime = int(random.uniform(500, 5000) + time)
+                timeinhotel = random.uniform(100, 48000)
+                checkouttime = int(timeinhotel + time)
+        if custwantroom == 'normal':
+            roomprice = 80
+        elif custwantroom == 'suite':
+            roomprice = 150
+        elif custwantroom == 'luxury suite':
+            roomprice = 300
+        days = timeinhotel/4800
+        money1 = int(days * roomprice)
+        money(money1)
 
-        schedule.update({checkouttime: customernamewospace + ' checkout'})
+        schedule.update({checkouttime: customername + ' checkout'})
         with open(findfolder() + '\\' + 'schedule.json', 'w') as f:
             json.dump(schedule, f, indent=4)
             f.close()

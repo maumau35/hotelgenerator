@@ -95,7 +95,10 @@ def roommaker(hotelsize):
                 'luxurysuites':luxurysuites,
                 'normalroomsavb': normalrooms,
                 'suitesavb': suites,
-                'luxurysuitesavb': luxurysuites
+                'luxurysuitesavb': luxurysuites,
+                'revenue': 0,
+                'lastweekrev': 0,
+                'curweekrev': 0
             }
             json.dump(hoteldatajson, f)
             f.close()

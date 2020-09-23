@@ -17,8 +17,4 @@ def gencustomer():
         desiredroom = 'luxury suite'
 
 
-
-
-
-
     return customernamewospace, customername, desiredroom
