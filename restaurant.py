@@ -7,7 +7,7 @@ def restaurant(time1, name):
     with open(findfolder()+'\\'+'restaurant.json', 'r') as f:
         restaurant = json.loads(f.read())
         f.close()
-    options = ['steak', 'burger', 'carpaccio']
+    options = ['steak', 'burger', 'carpaccio', 'spaghetti bolognese']
     choice = random.choice(options)
 
     with open(findfolder() +'\\' + 'custdata.json', 'r') as f:

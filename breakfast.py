@@ -19,7 +19,11 @@ def breakfast(time1, breakf, totalcustomers, breakpers):
                 f.close()
 
             customerlist = [*customersdata]
+            maxlen = len(customerlist)
+            if breakpers == maxlen:
+                return breakpers, breakf, daytime
             name = customerlist[breakpers]
+
             breakpers += 1
             custdata = customersdata[name]
 
