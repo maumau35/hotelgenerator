@@ -16,10 +16,20 @@ schedule={}
 
 
 def start():
-    hotelsize = chooseoption()
+    hotelsize, pause = chooseoption()
+    if pause == 'start':
+        return
     roommaker(hotelsize)
     hotelfolder = findfolder()
-
+    with open(findfolder()+'\\'+'time.txt', 'w') as f:
+        f.write('1')
+        f.close()
+    breakfastnum = {
+        'breakf':0,
+        'breakpers':0}
+    with open(findfolder()+'\\'+'breakfastnum.json', 'w') as f:
+        json.dump(breakfastnum, f, indent=4)
+        f.close()
 
     with open(hotelfolder + '\\' + 'hoteldata.json', 'r') as f:
         hoteldata = json.loads(f.read())
@@ -67,18 +77,28 @@ def start():
     with open(findfolder() + '\\' + 'pool.json', 'w') as f:
         json.dump(pool, f, indent=4)
         f.close()
-    return totalcustomers
+    return
 
 
 def counter():
-    totalcustomers = start()
-    persperit = totalcustomers/48000
+    start()
     hotelfolder = findfolder()
+    with open(hotelfolder + '\\' + 'hoteldata.json', 'r') as f:
+        hoteldata = json.loads(f.read())
+        f.close()
+    totalrooms = (hoteldata['totalrooms'])
+    totalcustomers = totalrooms - (hoteldata['normalroomsavb'] + hoteldata['suitesavb'] + hoteldata['luxurysuitesavb'])
+    persperit = totalcustomers/48000
+    
+    with open(findfolder()+'\\'+'time.txt', 'r') as f:
+            count = int(f.read())
+            f.close()
 
-    count = 1
+    with open(findfolder()+'\\'+'breakfastnum.json', 'r') as f:
+        breakfastnum = json.loads(f.read())
+        f.close()
     liveupdate = []
-    breakf=0
-    breakpers=0
+    breakf, breakpers=breakfastnum['breakf'], breakfastnum['breakpers']
 
     while True:
         randomnumber = random.uniform(0, 1)
@@ -191,8 +211,10 @@ def counter():
 
 
         count += 1
-
-
+        breakfastnum['breakf'], breakfastnum['breakpers'] = breakf, breakpers
+        with open(findfolder()+'\\'+'breakfastnum.json', 'w') as f:
+            json.dump(breakfastnum, f, indent=4)
+            f.close()
 
         with open(findfolder()+'\\'+'time.txt', 'w') as f:
             f.write(str(count))
