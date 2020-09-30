@@ -17,14 +17,12 @@ def custactions(time1, totalcustomers):
 
     localtime = int(time1 / 4800 - 0.5)
     daytime = time1 - localtime * 4800
-    chanceforaction = totalcustomers / 1000
+    chanceforaction = totalcustomers / 500
     if chanceforaction > random.uniform(0, 1):
         with open(findfolder() + '\\' + 'custdata.json', 'r') as f:
             custdataactions = json.loads(f.read())
             f.close()
         customerlist = [*custdataactions]
-
-
 
         customer = random.choice(customerlist)
         chancerestaurant = random.uniform(0,1)

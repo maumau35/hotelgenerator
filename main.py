@@ -150,17 +150,28 @@ def counter():
                     liveupdate.insert(0,checkoutupdate)
                 else:
                     if schedule[str(count)].endswith(' rest'):
+                        filename = 'restaurant.json'
                         personname = schedule[str(count)]
                         personname = personname[:-5]
                     elif schedule[str(count)].endswith(' city'):
+                        filename = 'city.json'
                         personname = schedule[str(count)]
                         personname = personname[:-5]
                     elif schedule[str(count)].endswith(' brea'):
+                        filename = 'breakfast.json'
                         personname = schedule[str(count)]
                         personname = personname[:-5]
                     elif schedule[str(count)].endswith(' pool'):
+                        filename = 'pool.json'
                         personname = schedule[str(count)]
                         personname = personname[:-5]
+                    with open(findfolder() + '\\' + filename, 'r') as f:
+                        actionfile = json.loads(f.read())
+                        f.close()
+                    del actionfile[personname]
+                    with open(findfolder() + '\\' + filename, 'w') as f:
+                        json.dump(actionfile, f, indent=4)
+                        f.close()
                     with open(findfolder() + '\\' + 'custdata.json', 'r') as f:
                         customersdata = json.loads(f.read())
                         f.close()

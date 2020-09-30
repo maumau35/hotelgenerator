@@ -14,39 +14,22 @@ def cleaners():
         print(hoteldata)
 
         f.close()
-    roomnumber = 1
-    currentfloor = 0
     with open(hotelfolder + "\\" + 'roomfile.json', "r") as f:
         roomsdata = json.loads(f.read())
         f.close()
-
-
-    while currentfloor <= int(hoteldata['floors']):
-        for _ in range(int(hoteldata['rooms'])):
-            stringroom = str(roomnumber)
-            if len(stringroom) == 1:
-                stringroom = '0' + stringroom
-
-                room = 'room ' + str(currentfloor) + stringroom
-
-
-                roomdata = roomsdata[room]
-
-            if roomdata['occupantsstatus'] == 'away':
-                roomdata['lastclean'] = time1
-
-                roomsdata[room] = roomdata
-
-
-
-            else:
-                navbroom = str(currentfloor) + stringroom
-
-            if roomnumber == hoteldata['rooms']:
-                roomnumber = 1
-                currentfloor += 1
-            else:
-                roomnumber += 1
+    with open(findfolder() + '\\' + 'custdata.json', 'r') as f:
+         customersdata = json.loads(f.read())
+         f.close()
+    customerlist = [*customersdata]
+    maxlen = len(customerlist)
+    for x in range(maxlen):
+        customername = customerlist[x]
+        customer = customersdata[customername]
+        room = 'room '+ customer['stayingin']
+        roomdata = roomsdata[room]
+        if customer['status'] != 'inroom':
+            roomdata['lastclean'] = time1
+            roomsdata[room] = roomdata
 
 
     with open(hotelfolder + "\\" + 'roomfile.json', "w") as f:
