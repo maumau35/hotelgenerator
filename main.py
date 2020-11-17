@@ -210,10 +210,14 @@ def counter():
 
             print(livedata)
             lenliveupdate = len(liveupdate)
-            if lenliveupdate > 10:
-                size = lenliveupdate - (lenliveupdate - 10)
+            if lenliveupdate > 20:
+                size = lenliveupdate - (lenliveupdate - 20)
             else:
                 size = lenliveupdate
+            with open(findfolder() + '\\' + 'livefeed.json', 'w') as f:
+                for item in liveupdate:
+                    f.write("%s\n" % item)
+                f.close()
 
             for x in range(size):
 

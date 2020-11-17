@@ -19,7 +19,7 @@ def breakfast(time1, breakf, totalcustomers, breakpers):
                 f.close()
 
             customerlist = [*customersdata]
-            maxlen = len(customerlist)
+            maxlen = len(customerlist)-1
             if breakpers == maxlen:
                 return breakpers, breakf, daytime
             name = customerlist[breakpers]
@@ -31,7 +31,7 @@ def breakfast(time1, breakf, totalcustomers, breakpers):
                 with open(findfolder() + '\\' + 'breakfast.json', 'r') as f:
                     breakfast = json.loads(f.read())
                     f.close()
-                options = ['croissant', 'yoghurt', 'smoked salmon', 'cake']
+                options = ['croissant', 'yoghurt', 'smoked salmon', 'cake', 'bread with jelly','bread with nutella', 'sunny side up egg', 'boiled egg']
                 choice = random.choice(options)
 
                 with open(findfolder() + '\\' + 'schedule.json', 'r') as f:
